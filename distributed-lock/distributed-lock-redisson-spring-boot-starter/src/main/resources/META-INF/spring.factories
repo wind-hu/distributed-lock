@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.windhu.distributed.lock.redisson.autoconfigure.RedissonDistributedLockAutoConfiguration
