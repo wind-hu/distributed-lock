@@ -5,7 +5,7 @@
 package com.windhu.distributed.lock.templates;
 
 import com.windhu.distributed.lock.autoconfigure.properties.DistributedLockProperties;
-import com.windhu.distributed.lock.exceptions.DistributedLockExpection;
+import com.windhu.distributed.lock.exceptions.DistributedLockException;
 import com.windhu.distributed.lock.interfaces.IDistributedLock;
 import com.windhu.distributed.lock.model.DistributedLockInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -95,9 +95,9 @@ public class DistributedLockTemplate {
             }
         } catch (InterruptedException e) {
             log.error("Thread sleep error", e);
-            throw new DistributedLockExpection("Thread sleep error.");
+            throw new DistributedLockException("Thread sleep error.");
         }
-        throw new DistributedLockExpection("Get DistributedLock time out.");
+        throw new DistributedLockException("Get DistributedLock time out.");
     }
 
     /**
