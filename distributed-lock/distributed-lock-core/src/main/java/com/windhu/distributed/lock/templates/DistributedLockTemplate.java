@@ -8,7 +8,6 @@ import com.windhu.distributed.lock.autoconfigure.properties.DistributedLockPrope
 import com.windhu.distributed.lock.exceptions.DistributedLockExpection;
 import com.windhu.distributed.lock.interfaces.IDistributedLock;
 import com.windhu.distributed.lock.model.DistributedLockInfo;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.util.Assert;
 
@@ -22,13 +21,18 @@ import java.util.stream.Collectors;
  * @author : wind-hu
  **/
 @Slf4j
-@Setter
 public class DistributedLockTemplate {
     private DistributedLockProperties distributedLockProperties;
 
     private List<? extends IDistributedLock> distributedLockInstances;
 
     private IDistributedLock distributedLockImpl;
+
+    public DistributedLockTemplate(DistributedLockProperties distributedLockProperties,
+                                   List<? extends IDistributedLock> distributedLockInstances) {
+        this.distributedLockProperties = distributedLockProperties;
+        this.distributedLockInstances = distributedLockInstances;
+    }
 
     /**
      * 初始化属性
@@ -38,7 +42,7 @@ public class DistributedLockTemplate {
         Assert.isTrue(distributedLockProperties.getExpireTime() > 0, "ExpireTime must more than zero.");
         Assert.isTrue(distributedLockProperties.getRetryInterval() > 0, "RetryInterval must more than zero.");
         Assert.isTrue(distributedLockProperties.getRetryCount() > 0, "RetryCount must more than zero.");
-        Assert.notEmpty(distributedLockInstances, "distributedLockImpls must have at least one.");
+        Assert.notEmpty(distributedLockInstances, "distributedLock Implements must have at least one.");
 
         if (null != distributedLockProperties.getDistributedLockImplement()) {
             this.distributedLockImpl = distributedLockInstances.stream()
