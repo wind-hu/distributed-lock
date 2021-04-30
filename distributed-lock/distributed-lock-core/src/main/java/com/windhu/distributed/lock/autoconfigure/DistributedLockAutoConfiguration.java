@@ -24,9 +24,6 @@ public class DistributedLockAutoConfiguration {
     @Bean
     public DistributedLockTemplate distributedLockTemplate(
             DistributedLockProperties distributedLockProperties, List<IDistributedLock> distributedLocks) {
-        DistributedLockTemplate distributedLockTemplate = new DistributedLockTemplate();
-        distributedLockTemplate.setDistributedLockProperties(distributedLockProperties);
-        distributedLockTemplate.setDistributedLockInstances(distributedLocks);
-        return distributedLockTemplate;
+        return new DistributedLockTemplate(distributedLockProperties, distributedLocks);
     }
 }
