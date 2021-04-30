@@ -9,12 +9,12 @@ package com.windhu.distributed.lock.exceptions;
  *
  * @author : wind-hu
  **/
-public class DistributedLockExpection extends RuntimeException {
-    public DistributedLockExpection() {
+public class DistributedLockException extends RuntimeException {
+    public DistributedLockException() {
         super();
     }
 
-    public DistributedLockExpection(String message) {
+    public DistributedLockException(String message) {
         super(message);
     }
 }
