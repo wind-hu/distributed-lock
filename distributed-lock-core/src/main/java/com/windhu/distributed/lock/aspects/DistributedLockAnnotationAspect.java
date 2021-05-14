@@ -69,7 +69,7 @@ public class DistributedLockAnnotationAspect implements Ordered {
         DistributedLock annotation = method.getAnnotation(DistributedLock.class);
         if (StringUtils.isEmpty(annotation.key())) {
             Class<?> declaringClass = method.getDeclaringClass();
-            return declaringClass.getName() + "." + method.getName();
+            return "distributedLock-" + declaringClass.getName() + "." + method.getName();
         }
         return annotation.key();
     }
