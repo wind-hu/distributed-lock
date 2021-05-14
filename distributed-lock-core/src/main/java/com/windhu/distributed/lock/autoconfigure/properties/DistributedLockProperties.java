@@ -32,6 +32,11 @@ public class DistributedLockProperties {
      * 重试次数
      */
     private int retryCount = 3;
+    
+    /**
+     * 切面排序
+     */
+    private int aspectOrder = 1;
 
     /**
      * 分布式锁实现类（redisson、redisTemplate、zookeeper）
