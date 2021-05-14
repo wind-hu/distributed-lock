@@ -24,7 +24,7 @@ zookeeper部分实现会后续补充上去
 
 3. 配置分布式锁具体实现
   根据需要选择实现类
-  根据业务场景可灵活配置 过期时间、重试次数、重试间隔时间
+  根据业务场景可灵活配置 过期时间、重试次数、重试间隔时间、注解处理用切面的order数值
 ```yaml
 distributed:
   lock:
@@ -32,4 +32,5 @@ distributed:
     expireTime: 30000
     retryInterval: 1000
     retryCount: 3
+    aspect-order: 1
 ```
