@@ -41,7 +41,7 @@ public class DistributedLockTemplate {
     public void init() {
         Assert.isTrue(distributedLockProperties.getExpireTime() > 0, "ExpireTime must more than zero.");
         Assert.isTrue(distributedLockProperties.getRetryInterval() > 0, "RetryInterval must more than zero.");
-        Assert.isTrue(distributedLockProperties.getRetryCount() > 0, "RetryCount must more than zero.");
+        Assert.isTrue(distributedLockProperties.getRetryCount() >= 0, "RetryCount must more than zero.");
         Assert.notEmpty(distributedLockInstances, "distributedLock Implements must have at least one.");
 
         if (null != distributedLockProperties.getDistributedLockImplement()) {
@@ -77,7 +77,7 @@ public class DistributedLockTemplate {
         String value = String.valueOf(Thread.currentThread().getId());
         int retryCount = 0;
         try {
-            while (retryCount < distributedLockProperties.getRetryCount()) {
+            do {
                 Object acquire = distributedLockImpl.acquire(key, value, expire);
                 retryCount++;
                 if (null != acquire) {
@@ -92,7 +92,7 @@ public class DistributedLockTemplate {
                             .build();
                 }
                 Thread.sleep(distributedLockProperties.getRetryInterval());
-            }
+            } while (retryCount < distributedLockProperties.getRetryCount());
         } catch (InterruptedException e) {
             log.error("Thread sleep error", e);
             throw new DistributedLockException("Thread sleep error.");
