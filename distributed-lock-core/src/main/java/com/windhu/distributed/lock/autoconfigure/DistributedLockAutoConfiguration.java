@@ -4,6 +4,7 @@
 
 package com.windhu.distributed.lock.autoconfigure;
 
+import com.windhu.distributed.lock.aspects.DistributedLockAnnotationAspect;
 import com.windhu.distributed.lock.autoconfigure.properties.DistributedLockProperties;
 import com.windhu.distributed.lock.interfaces.IDistributedLock;
 import com.windhu.distributed.lock.templates.DistributedLockTemplate;
@@ -25,5 +26,12 @@ public class DistributedLockAutoConfiguration {
     public DistributedLockTemplate distributedLockTemplate(
             DistributedLockProperties distributedLockProperties, List<IDistributedLock> distributedLocks) {
         return new DistributedLockTemplate(distributedLockProperties, distributedLocks);
+    }
+
+    @Bean
+    public DistributedLockAnnotationAspect distributedLockAnnotationAspect(
+            DistributedLockTemplate distributedLockTemplate,
+            DistributedLockProperties distributedLockProperties) {
+        return new DistributedLockAnnotationAspect(distributedLockTemplate, distributedLockProperties);
     }
 }
