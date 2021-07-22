@@ -48,7 +48,9 @@ public class DistributedLockTemplate {
             this.distributedLockImpl = distributedLockInstances.stream()
                     .filter(item -> item.getClass() == distributedLockProperties.getDistributedLockImplement())
                     .collect(Collectors.toList())
-                    .get(0);
+                    .stream()
+                    .findFirst()
+                    .orElseThrow(() -> new DistributedLockException("no distributedLockInstances load."));
         } else {
             // @Order control
             distributedLockImpl = distributedLockInstances.get(0);
