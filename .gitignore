@@ -1,5 +1,13 @@
-.idea/libraries/
-target/
-*.iml
-.idea/*.xml
-.idea/*
+## Maven ##
+**/.mvnw
+**/.mvn
+**/mvnw
+**/mvnw.cmd
+
+## SpringBoot ##
+**/target
+**/src/test
+
+## IntelliJ IDEA ##
+**/.idea
+**/**.iml
